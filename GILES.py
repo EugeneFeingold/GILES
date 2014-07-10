@@ -12,9 +12,17 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.OUT, pull_up_down=GPIO.PUD_DOWN)
 GPIO.output(18, GPIO.LOW)
 
-pygame.init()
-j = pygame.joystick.Joystick(0)
-j.init()
+initSuccess = False
+while not initSuccess:
+    try:
+        pygame.init()
+        j = pygame.joystick.Joystick(0)
+        j.init()
+        if not (j is None):
+            initSuccess = True
+    except:
+        initSuccess = False
+
 
 port = serial.Serial("/dev/ttyAMA0", baudrate=38400, timeout=3.0)
 port.write(chr(64))

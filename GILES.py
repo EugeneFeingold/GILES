@@ -20,9 +20,11 @@ while not initSuccess:
         j.init()
         if not (j is None):
             initSuccess = True
-    except:
+    except Exception as e:
+        print e
         initSuccess = False
 
+print "Connected to controller!"
 
 port = serial.Serial("/dev/ttyAMA0", baudrate=38400, timeout=3.0)
 port.write(chr(64))
